@@ -5,3 +5,5 @@
 `kk init -m github.com/waler4ik/kk-example` created initial project.
 
 `kk add resource machines/data` added REST resource with URI machines/data.
+
+`kk add ws /ws` added websocket resource with URI /ws.
