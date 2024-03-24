@@ -2,6 +2,12 @@
 
 package api
 
-type generatedAPI struct {
-	//TODO add generated provider here
+
+import (
+	"github.com/waler4ik/kk-example/internal/websocket"
+)
+
+
+type GeneratedAPI struct {
+	Ws websocket.Websocket
 }

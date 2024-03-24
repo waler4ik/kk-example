@@ -15,6 +15,6 @@ func ConfigureRouter(a *api.API) http.Handler {
 
 	ConfigureMiddleware(r)
 	data.ConfigureRouter(a, r)
-
+	r.HandleFunc("/ws", a.Ws.Handler)
 	return r
 }
