@@ -52,7 +52,7 @@ func (c Controller) ListData(w http.ResponseWriter, r *http.Request) {
 	}
 
 	forRendering := []render.Renderer{}
-	if data, err := c.p.GetData(qp); err != nil {
+	if data, err := c.p.GetData(r.Context(), qp); err != nil {
 		render.Render(w, r, errors.ErrInternalServerError(err))
 		return
 	} else {
@@ -73,7 +73,7 @@ func (c Controller) CreateDatum(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := c.p.CreateDatum(datum); err != nil {
+	if err := c.p.CreateDatum(r.Context(), datum); err != nil {
 		render.Render(w, r, errors.ErrInternalServerError(err))
 		return
 	}
@@ -98,7 +98,7 @@ func (c Controller) UpdateDatum(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := c.p.UpdateDatum(datum); err != nil {
+	if err := c.p.UpdateDatum(r.Context(), datum); err != nil {
 		render.Render(w, r, errors.ErrInternalServerError(err))
 		return
 	}
@@ -106,7 +106,7 @@ func (c Controller) UpdateDatum(w http.ResponseWriter, r *http.Request) {
 
 func (c Controller) DeleteDatum(w http.ResponseWriter, r *http.Request) {
 	datum := r.Context().Value(DatumCtxKey).(*Datum)
-	if err := c.p.DeleteDatum(datum.UUID.String()); err != nil {
+	if err := c.p.DeleteDatum(r.Context(), datum); err != nil {
 		render.Render(w, r, errors.ErrInternalServerError(err))
 		return
 	}
@@ -122,7 +122,7 @@ func (c Controller) DatumCtx(next http.Handler) http.Handler {
 		var err error
 
 		if datumID := chi.URLParam(r, "datumID"); datumID != "" {
-			datum, err = c.p.GetDatum(datumID)
+			datum, err = c.p.GetDatum(r.Context(), datumID)
 			if err != nil {
 				render.Render(w, r, errors.ErrNotFound)
 				return

@@ -4,18 +4,19 @@ package data
 
 import (
 	"net/http"
-
-	"github.com/google/uuid"
 )
 
+// Datum is the type that is exchanged in the REST interface as a JSON object
 type Datum struct {
-	UUID uuid.UUID
+	// Define JSON attributes here
 }
 
+// Binder interface for managing request payloads. Called before passing payload to the Provider.
 func (c *Datum) Bind(r *http.Request) error {
 	return nil
 }
 
+// Renderer interface for managing response payloads. Called after Provider has returned the payload but before sending the response to the client.
 func (c *Datum) Render(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
