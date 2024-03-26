@@ -3,6 +3,7 @@
 package data
 
 import (
+	"context"
 	"fmt"
 	"github.com/waler4ik/kk-example/internal/api"
 )
@@ -16,25 +17,27 @@ func NewProvider(a *api.API) Provider {
 
 // QueryParameter implements github.com/gorilla/schema
 type QueryParameter struct {
-	//SomeNiceQueryParameter         string `schema:"queryparametername,required"`
+	Name  string `schema:"name,required"`  // custom name, must be supplied
+    Phone string `schema:"phone"`          // custom name
+    Admin bool   `schema:"-"`              // this field is never set
 }
 
-func (p Provider) GetData(qp QueryParameter) ([]*Datum, error) {
+func (p Provider) GetData(ctx context.Context, qp QueryParameter) ([]*Datum, error) {
 	return nil, fmt.Errorf("not implemented")
 }
 
-func (p Provider) GetDatum(id string) (*Datum, error) {
+func (p Provider) GetDatum(ctx context.Context, id string) (*Datum, error) {
 	return nil, fmt.Errorf("not implemented")
 }
 
-func (p Provider) CreateDatum(c *Datum) error {
+func (p Provider) CreateDatum(ctx context.Context, c *Datum) error {
 	return fmt.Errorf("not implemented")
 }
 
-func (p Provider) UpdateDatum(c *Datum) error {
+func (p Provider) UpdateDatum(ctx context.Context, c *Datum) error {
 	return fmt.Errorf("not implemented")
 }
 
-func (p Provider) DeleteDatum(id string) error {
+func (p Provider) DeleteDatum(ctx context.Context, c *Datum) error {
 	return fmt.Errorf("not implemented")
 }
