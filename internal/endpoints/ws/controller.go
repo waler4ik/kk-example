@@ -35,6 +35,15 @@ func (c *controller) Broadcast(data []byte) error {
 	return nil
 }
 
+// GetW godoc
+//
+//	@Summary		W websocket
+//	@Description	get W websocket
+//	@Tags			ws
+//	@Accept			json
+//	@Produce		json
+//	@Success		101
+//	@Router			/ws [get]
 func (c *controller) Handler(w http.ResponseWriter, r *http.Request) {
 	c.m.HandleRequest(w, r)
 }

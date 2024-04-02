@@ -51,15 +51,11 @@ func (c Controller) ListData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	forRendering := []render.Renderer{}
 	if data, err := c.p.GetData(r.Context(), qp); err != nil {
 		render.Render(w, r, errors.ErrInternalServerError(err))
 		return
 	} else {
-		for _, c := range data {
-			forRendering = append(forRendering, c)
-		}
-		if err := render.RenderList(w, r, forRendering); err != nil {
+		if err := render.RenderList(w, r, data); err != nil {
 			render.Render(w, r, errors.ErrRender(err))
 			return
 		}
@@ -73,13 +69,13 @@ func (c Controller) CreateDatum(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := c.p.CreateDatum(r.Context(), datum); err != nil {
+	if datum, err := c.p.CreateDatum(r.Context(), datum); err != nil {
 		render.Render(w, r, errors.ErrInternalServerError(err))
 		return
+	} else {
+		render.Status(r, http.StatusCreated)
+		render.Render(w, r, datum)
 	}
-
-	render.Status(r, http.StatusCreated)
-	render.Render(w, r, datum)
 }
 
 func (c Controller) GetDatum(w http.ResponseWriter, r *http.Request) {
