@@ -2,12 +2,10 @@
 
 package api
 
-
 import (
 	"github.com/waler4ik/kk-example/internal/websocket"
 )
 
-
-type GeneratedAPI struct {
-	Ws websocket.Websocket
+type Websockets struct {
+	Ws websocket.Websocket // Path: "/ws"
 }

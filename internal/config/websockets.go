@@ -7,12 +7,7 @@ import (
 	"github.com/waler4ik/kk-example/internal/endpoints/ws"
 )
 
-func ConfigureAPI(a *api.API) {
-	configureGeneratedAPI(&a.GeneratedAPI)
-	configureGeneralAPI(a)
-}
-
-func configureGeneratedAPI(a *api.GeneratedAPI) {
+func configureWebsockets(a *api.Websockets) {
 	//websockets
 	a.Ws = ws.NewWebsocket()
 }
