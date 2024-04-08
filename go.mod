@@ -3,10 +3,12 @@ module github.com/waler4ik/kk-example
 go 1.20
 
 require (
+	github.com/caarlos0/env/v10 v10.0.0
 	github.com/go-chi/chi/v5 v5.0.12
 	github.com/go-chi/render v1.0.3
 	github.com/gorilla/schema v1.2.1
 	github.com/jessevdk/go-flags v1.5.0
+	github.com/lib/pq v1.10.9
 	github.com/olahol/melody v1.1.4
 	golang.org/x/net v0.21.0
 )
